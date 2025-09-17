@@ -61,6 +61,7 @@ div.sidebar div.myTasks span.day {
 
 div.sidebar div.myTasks p {
     padding-top: 15px;
+    cursor: pointer;
 }
 /* sidebar */
 
