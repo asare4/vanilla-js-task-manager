@@ -80,7 +80,7 @@ div.main {
 div.main button.addTasks {
     margin-bottom: 20px;
     font-weight: 500;
-    font-size: large;
+    font-size: larger;
     padding: 10px 20px;
     border-radius: 10px;
 }
@@ -97,5 +97,6 @@ div.main h3 {
 div.main ul li {
     padding: 10px 0;
     list-style-type: circle;
+    margin-left: 20px;
 }
 /* main */
