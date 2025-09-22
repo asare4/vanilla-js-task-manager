@@ -56,3 +56,32 @@ addBtn.addEventListener("click", () => {
   saveTasks();
   renderTasks();
 });
+
+
+// Task Rendering
+function renderTasks() {
+  list.innerHTML = "";
+
+  if (tasks.length === 0) {
+    list.innerHTML = "<li>No tasks added yet</li>";
+  } else {
+    tasks.forEach(task => {
+      const li = document.createElement("li");
+      li.textContent = task.name;
+
+      // delete button
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "❌";
+      delBtn.style.marginLeft = "10px";
+
+      delBtn.addEventListener("click", () => {
+        deleteTask(task.id);
+      });
+
+      li.appendChild(delBtn);
+      list.appendChild(li);
+    });
+  }
+
+  count.textContent = tasks.length;
+}
