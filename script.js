@@ -11,7 +11,7 @@ function showHelp() {
 };
 
 if (help) {
-    help.addEventListener("click", showHelp);
+  help.addEventListener("click", showHelp);
 };
 
 
@@ -28,3 +28,31 @@ function showToday() {
 }
 
 document.addEventListener("DOMContentLoaded", showToday);
+
+
+// Tasks Array
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+
+// Add Tasks
+addBtn.addEventListener("click", () => {
+  const taskName = prompt("Enter your task: ");
+  if (taskName === null || taskName === undefined) {
+    return;
+  };
+
+  const task = {
+    id: Date.now(),
+    name: taskName,
+    date: new Date().toDateString(),
+    completed: false
+  };
+
+  tasks.push(task);
+  saveTasks();
+  renderTasks();
+});
