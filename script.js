@@ -46,7 +46,6 @@ addBtn.addEventListener("click", () => {
   };
 
   const task = {
-    id: Date.now(),
     name: taskName,
     date: new Date().toDateString(),
     completed: false
@@ -65,17 +64,18 @@ function renderTasks() {
   if (tasks.length === 0) {
     list.innerHTML = "<li>No tasks added yet</li>";
   } else {
-    tasks.forEach(task => {
+    tasks.forEach((task, index) => {
       const li = document.createElement("li");
       li.textContent = task.name;
 
       // delete button
       const delBtn = document.createElement("button");
       delBtn.textContent = "❌";
-      delBtn.style.marginLeft = "10px";
+      delBtn.style.marginLeft = "14px";
+      delBtn.style.cursor = "pointer";
 
       delBtn.addEventListener("click", () => {
-        deleteTask(task.id);
+        deleteTask(index);
       });
 
       li.appendChild(delBtn);
@@ -85,3 +85,18 @@ function renderTasks() {
 
   count.textContent = tasks.length;
 }
+
+
+// Delete Functionality
+function deleteTask(index) {
+  tasks.splice(index, 1);
+
+  saveTasks();
+  renderTasks();
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  showToday();
+  renderTasks();
+});
