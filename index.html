@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <!-- sidebar -->
     <div class="sidebar">
-        <h1>🗹 Task Manager</h1>
-        <div class="myTasks">
-            <h4>My Tasks</h4>
+      <h1>🗹 Task Manager</h1>
+      <div class="myTasks">
+        <h4>My Tasks</h4>
 
-            <button type="button" class="allTask">🗸 All Tasks <span class="allTaskCount">0</span></button>
+        <button type="button" class="allTask">
+          🗸 All Tasks <span class="allTaskCount">0</span>
+        </button>
 
-            <button type="button" class="daysTask"><span class="day">00</span> Today <span class="daysTaskCount">0</span></button>
+        <button type="button" class="daysTask">
+          <span class="day">00</span> Today <span class="daysTaskCount">0</span>
+        </button>
 
-            <hr>
+        <hr />
 
-            <p class="help">❔ Help & Tutorial</p>
-        </div>
+        <p class="help">❔ Help & Tutorial</p>
+      </div>
     </div>
     <!-- sidebar -->
 
     <!-- main -->
-     <div class="main">
-        <button class="addTasks">+ Add task</button>
-        <hr>
-        <div class="allTasks">
-            <h3>📝 All Tasks</h3>
-            <ul>
-                <li>No tasks added yet </li>
-                <li>No tasks added yet </li>
-                <li>No tasks added yet </li>
-                <li>No tasks added yet </li>
-            </ul>
-        </div>
-     </div>
+    <div class="main">
+      <form action="#" id="taskForm" method="post" onsubmit="event.preventDefault(); saveTasks()">
+        <input type="text" id="taskInput" placeholder="✍️ Add a new task" />
+        <button class="addTasks" type="submit">+ Add task</button>
+      </form>
+      <hr />
+      <div class="allTasks">
+        <h3>📝 All Tasks</h3>
+        <!-- <ul>
+          <li>No tasks added yet </li>
+          <li>No tasks added yet </li>
+          <li>No tasks added yet </li>
+          <li>No tasks added yet </li>
+        </ul> -->
+      </div>
+    </div>
     <!-- main -->
-
+     
     
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
