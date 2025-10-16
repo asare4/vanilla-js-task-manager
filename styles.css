@@ -100,4 +100,10 @@ div.main ul li {
     list-style-type: circle;
     margin-left: 20px;
 }
+
+ #taskInput {
+    width: 200px;
+    height: 39px;
+    clip-path: px;
+}
 /* main */
