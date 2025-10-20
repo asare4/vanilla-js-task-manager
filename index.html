@@ -14,7 +14,7 @@
         <h4>My Tasks</h4>
 
         <button type="button" class="allTask">
-          🗸 All Tasks <span class="allTaskCount" id="all-tasks-count">0</span>
+          🗸 All Tasks <span class="allTaskCount" id="all-task-count">0</span>
         </button>
 
         <button type="button" class="daysTask">
@@ -30,8 +30,8 @@
 
     <!-- main -->
     <div class="main">
-      <form action="#" id="task-form" method="post" onsubmit="event.preventDefault(); saveTasks()">
-        <input type="text" id="task-input" placeholder="✍️ Add a new task" />
+      <form action="#" id="task-form" method="post">
+        <input type="text" id="input-new-task" placeholder="✍️ Add a new task" />
         <button id="btn-new-task" class="addTasks" type="submit">+ Add task</button>
       </form>
       <hr />
@@ -45,11 +45,14 @@
         </ul> -->
         <table>
           <thead>
-            <th>#</th>
-            <th>Task</th>
-            <th>Status</th>
-            <th>Created</th>
-            <!-- <th>Action</th> -->
+            <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Done</th>
+              <th>Action</th>
+            </tr>
           </thead>
           <tbody id="table-data-body">
             
