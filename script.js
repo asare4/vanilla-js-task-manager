@@ -1,9 +1,8 @@
 const daySpan = document.getElementById("day-span");
-const count = document.getElementById("all-task-count");
-const list = document.getElementById("all-tasks tbody");
+const taskCount = document.getElementById("all-task-count");
 const help = document.getElementById("help-btn");
-const myForm = document.getElementById("task-form");
-const tableData = document.getElementById("table-data-body");
+const taskForm = document.getElementById("task-form");
+const taskTableBody = document.getElementById("table-data-body");
 const btnSubmit = document.getElementById("btn-new-task");
 
 
@@ -49,17 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
   savedTasks.forEach((t) => {
     const newRow = document.createElement("tr");
     newRow.innerHTML = `
-      <td>${t.completed ? "🔴" : "⭕"}${tableData.children.length + 1}</td>
+      <td>${t.completed ? "🔴" : "⭕"}${taskTableBody.children.length + 1}</td>
       <td>${t.title}</td>
       <td>${t.status}</td>
       <td>${t.date}</td>
       <td><input type="checkbox" ${t.completed ? "checked" : ""}></td>
       <td><button class="delete-btn">❌</button></td>
     `;
-    tableData.appendChild(newRow);
+    taskTableBody.appendChild(newRow);
   });
 
-  count.textContent = savedTasks.length;
+  taskCount.textContent = savedTasks.length;
 });
 
 
@@ -83,17 +82,17 @@ const newTask = () => {
 
   const newRow = document.createElement("tr");
   newRow.innerHTML = `
-    <td>⭕${tableData.children.length + 1}</td>
+    <td>⭕${taskTableBody.children.length + 1}</td>
     <td>${taskInput}</td>
     <td>In-Progress</td>
     <td>${new Date().toISOString().split("T")[0]}</td>
     <td>
-      <input type="checkbox" id="${tableData.children.length + 1}-check-box" >
+      <input type="checkbox" id="${taskTableBody.children.length + 1}-check-box" >
     </td>
     <td><button class="delete-btn">❌</button></td>
     `;
 
-  tableData.appendChild(newRow);
+  taskTableBody.appendChild(newRow);
 
   tasks.push({
     title: taskInput,
@@ -103,8 +102,8 @@ const newTask = () => {
   });
   saveTasks();  
   
-  count.textContent = tasks.length;
-  myForm.reset();
+  taskCount.textContent = tasks.length;
+  taskForm.reset();
 };
 
 
@@ -112,26 +111,42 @@ const newTask = () => {
 // ============================
 // Delete Tasks
 // ============================
-tableData.addEventListener("click", (e) => {
+taskTableBody.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-btn")) {
     const row = e.target.closest("tr");
-    const index = [...tableData.children].indexOf(row);
+    const index = [...taskTableBody.children].indexOf(row);
     tasks.splice(index, 1);
     saveTasks();
     row.remove();
-    count.textContent = tasks.length;
+
+    reindexTasks();
+    taskCount.textContent = tasks.length;
   }
 });
 
 
 
 // ============================
+// Reindex Tasks
+// ============================
+function reindexTasks() {
+  [...tableData.children].forEach((row, i) => {
+    const taskNum = i + 1;
+    const isCompleted = tasks[i]?.completed;
+    row.children[0].textContent = `${isCompleted ? "🔴" : "⭕"}${taskNum}`;
+  });
+}
+
+
+
+
+// ============================
 // Update Task Status
 // ============================
-tableData.addEventListener("change", (e) => {
+taskTableBody.addEventListener("change", (e) => {
   if (e.target.type === "checkbox") {
     const row = e.target.closest("tr");
-    const index = [...tableData.children].indexOf(row);
+    const index = [...taskTableBody.children].indexOf(row);
 
     tasks[index].completed = e.target.checked;
     tasks[index].status = e.target.checked ? "Completed" : "In-Progress";
@@ -148,7 +163,7 @@ tableData.addEventListener("change", (e) => {
 // ============================
 // Form Submission
 // ============================
-myForm.addEventListener("submit", (event) => {
+taskForm.addEventListener("submit", (event) => {
   event.preventDefault();
   newTask();
 });
