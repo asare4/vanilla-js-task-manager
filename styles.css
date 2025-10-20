@@ -108,4 +108,18 @@ div.main ul li {
     height: 2.5rem;
 }
 
+
+
+/*table*/
+table {
+    width: 100%;
+    text-align: left;
+}
+
+thead {
+    background: #3d3d3d;
+    color: #f9f9f9;
+}
+/*table*/
+
 /* main */
