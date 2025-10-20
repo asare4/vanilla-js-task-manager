@@ -7,16 +7,20 @@ const tableData = document.getElementById("table-data-body");
 const btnSubmit = document.getElementById("btn-new-task");
 
 
+
 // =======================
 // ❔ Help & Tutorial
 // =======================
 function showHelp() {
-    alert(" Tutorial:\n\n1. Click '+ Add task' to create a new task.\n2. All your tasks will appear under 'All Tasks'.\n3. Use the Delete button to remove tasks.\n4. Tasks will be saved in your browser so that it can be accessed later.\n ");
-};
+  alert(
+    " Tutorial:\n\n1. Click '+ Add task' to create a new task.\n2. All your tasks will appear under 'All Tasks'.\n3. Use the Delete button to remove tasks.\n4. Tasks will be saved in your browser so that it can be accessed later.\n "
+  );
+}
 
 if (help) {
   help.addEventListener("click", showHelp);
-};
+}
+
 
 
 // ============================================
@@ -30,10 +34,34 @@ function showToday() {
     dayNumber = "0" + dayNumber;
   }
 
-    daySpan.textContent = dayNumber;
+  daySpan.textContent = dayNumber;
 }
 
-document.addEventListener("DOMContentLoaded", showToday);
+
+
+// ==============================
+// Load saved tasks from localStorage
+// ==============================
+document.addEventListener("DOMContentLoaded", () => {
+  showToday();
+
+  const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  savedTasks.forEach((t) => {
+    const newRow = document.createElement("tr");
+    newRow.innerHTML = `
+      <td>${t.completed ? "🔴" : "⭕"}${tableData.children.length + 1}</td>
+      <td>${t.title}</td>
+      <td>${t.status}</td>
+      <td>${t.date}</td>
+      <td><input type="checkbox" ${t.completed ? "checked" : ""}></td>
+      <td><button class="delete-btn">❌</button></td>
+    `;
+    tableData.appendChild(newRow);
+  });
+
+  count.textContent = savedTasks.length;
+});
+
 
 
 // =============================
@@ -46,73 +74,81 @@ function saveTasks() {
 }
 
 
+
 // ============================
 // Add Tasks
 // ============================
-addBtn.addEventListener("click", () => {
-  const taskName = prompt("Enter your task: ");
-  if (taskName === null || taskName === undefined) {
-    return;
-  };
+const newTask = () => {
+  const taskInput = document.getElementById("input-new-task").value;
 
-  const task = {
-    name: taskName,
-    date: new Date().toDateString(),
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+    <td>⭕${tableData.children.length + 1}</td>
+    <td>${taskInput}</td>
+    <td>In-Progress</td>
+    <td>${new Date().toISOString().split("T")[0]}</td>
+    <td>
+      <input type="checkbox" id="${tableData.children.length + 1}-check-box" >
+    </td>
+    <td><button class="delete-btn">❌</button></td>
+    `;
+
+  tableData.appendChild(newRow);
+
+  tasks.push({
+    title: taskInput,
+    status: "In-Progress",
+    date: new Date().toISOString().split("T")[0],
     completed: false
-  };
+  });
+  saveTasks();  
+  
+  count.textContent = tasks.length;
+  myForm.reset();
+};
 
-  tasks.push(task);
-  saveTasks();
-  renderTasks();
+
+
+// ============================
+// Delete Tasks
+// ============================
+tableData.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-btn")) {
+    const row = e.target.closest("tr");
+    const index = [...tableData.children].indexOf(row);
+    tasks.splice(index, 1);
+    saveTasks();
+    row.remove();
+    count.textContent = tasks.length;
+  }
 });
 
 
 
 // ============================
-// Task Rendering
+// Update Task Status
 // ============================
-function renderTasks() {
-  list.innerHTML = "";
+tableData.addEventListener("change", (e) => {
+  if (e.target.type === "checkbox") {
+    const row = e.target.closest("tr");
+    const index = [...tableData.children].indexOf(row);
 
-  if (tasks.length === 0) {
-    list.innerHTML = "<li>No tasks added yet</li>";
-  } else {
-    tasks.forEach((task, index) => {
-      const li = document.createElement("li");
-      li.textContent = task.name;
+    tasks[index].completed = e.target.checked;
+    tasks[index].status = e.target.checked ? "Completed" : "In-Progress";
+    saveTasks();
 
-      // delete button
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "❌";
-      delBtn.style.marginLeft = "14px";
-      delBtn.style.cursor = "pointer";
-
-      delBtn.addEventListener("click", () => {
-        deleteTask(index);
-      });
-
-      li.appendChild(delBtn);
-      list.appendChild(li);
-    });
+  
+    row.children[0].textContent = e.target.checked ? `🔴${index + 1}` : `⭕${index + 1}`;
+    row.children[2].textContent = tasks[index].status;
   }
-
-  count.textContent = tasks.length;
-}
+});
 
 
 
 // ============================
-// Delete Functionality
+// Form Submission
 // ============================
-function deleteTask(index) {
-  tasks.splice(index, 1);
-
-  saveTasks();
-  renderTasks();
-}
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  showToday();
-  renderTasks();
+myForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  newTask();
 });
