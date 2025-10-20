@@ -79,11 +79,12 @@ div.main {
 
 
 div.main button.addTasks {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: 500;
     font-size: larger;
-    padding: 10px 20px;
+    padding: 5px 20px;
     border-radius: 10px;
+    height: 39px;
 }
 
 
@@ -101,9 +102,9 @@ div.main ul li {
     margin-left: 20px;
 }
 
- #task-input {
+ #input-new-task {
     width: 200px;
     height: 39px;
-    clip-path: px;
 }
+
 /* main */
