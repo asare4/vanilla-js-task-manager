@@ -14,28 +14,28 @@
         <h4>My Tasks</h4>
 
         <button type="button" class="allTask">
-          🗸 All Tasks <span class="allTaskCount">0</span>
+          🗸 All Tasks <span class="allTaskCount" id="all-tasks-count">0</span>
         </button>
 
         <button type="button" class="daysTask">
-          <span class="day">00</span> Today <span class="daysTaskCount">0</span>
+          <span class="day" id="day-span">00</span> Today <span class="daysTaskCount">0</span>
         </button>
 
         <hr />
 
-        <p class="help">❔ Help & Tutorial</p>
+        <p class="help" id="help-btn">❔ Help & Tutorial</p>
       </div>
     </div>
     <!-- sidebar -->
 
     <!-- main -->
     <div class="main">
-      <form action="#" id="taskForm" method="post" onsubmit="event.preventDefault(); saveTasks()">
-        <input type="text" id="taskInput" placeholder="✍️ Add a new task" />
-        <button class="addTasks" type="submit">+ Add task</button>
+      <form action="#" id="task-form" method="post" onsubmit="event.preventDefault(); saveTasks()">
+        <input type="text" id="task-input" placeholder="✍️ Add a new task" />
+        <button id="btn-new-task" class="addTasks" type="submit">+ Add task</button>
       </form>
       <hr />
-      <div class="allTasks">
+      <div class="allTasks" id="all-tasks">
         <h3>📝 All Tasks</h3>
         <!-- <ul>
           <li>No tasks added yet </li>

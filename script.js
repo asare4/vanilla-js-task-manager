@@ -1,8 +1,11 @@
-let daySpan = document.querySelector(".day");
-let addBtn = document.querySelector(".addTasks");
-let count = document.querySelector(".allTaskCount");
-let list = document.querySelector(".allTasks ul");
-let help = document.querySelector(".help");
+const daySpan = document.getElementById("day-span");
+const count = document.getElementById("all-task-count");
+const list = document.getElementById("all-tasks tbody");
+const help = document.getElementById("help-btn");
+const myForm = document.getElementById("task-form");
+const tableData = document.getElementById("table-data-body");
+const btnSubmit = document.getElementById("btn-new-task");
+
 
 // =======================
 // ❔ Help & Tutorial
