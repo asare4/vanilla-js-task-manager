@@ -6,7 +6,7 @@
 
 body {
     display: flex;
-    align-items: center;
+    align-items: 100vh;
 }
 
 /* sidebar */
@@ -73,8 +73,8 @@ div.main {
     height: 100vh;
     padding: 0 20px;
     justify-content: center;
-    background: rgb(72, 72, 72);
-    color: white;
+    background: #2f2f2f;
+    color: #f9f9f9;
 }
 
 
@@ -103,8 +103,9 @@ div.main ul li {
 }
 
  #input-new-task {
-    width: 200px;
-    height: 39px;
+    width: 60%;
+    min-width: 220px;
+    height: 2.5rem;
 }
 
 /* main */
