@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- sidebar -->
+    <div class="sidebar">
+      <h1>🗹 Task Manager</h1>
+      <div class="myTasks">
+        <h4>My Tasks</h4>
+
+        <button type="button" class="allTask">
+          🗸 All Tasks <span class="allTaskCount" id="all-task-count">0</span>
+        </button>
+
+        <button type="button" class="daysTask">
+          <span class="day" id="day-span">00</span> Today <span class="daysTaskCount">0</span>
+        </button>
+
+        <hr />
+
+        <p class="help" id="help-btn">❔ Help & Tutorial</p>
+      </div>
+    </div>
+    <!-- sidebar -->
+
+    <!-- main -->
+    <div class="main">
+      <form action="#" id="task-form" method="post">
+        <input type="text" id="input-new-task" placeholder="✍️ Add a new task" required />
+        <button id="btn-new-task" class="addTasks" type="submit">+ Add task</button>
+      </form>
+      <hr />
+      <div class="allTasks" id="all-tasks">
+        <h3>📝 All Tasks</h3>
+        <!-- <ul>
+          <li>No tasks added yet </li>
+          <li>No tasks added yet </li>
+          <li>No tasks added yet </li>
+          <li>No tasks added yet </li>
+        </ul> -->
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Done</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="table-data-body">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- main -->
+     
+    
+    <script src="script.js"></script>
+  </body>
+</html>
